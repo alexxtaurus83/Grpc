@@ -1,0 +1,66 @@
+syntax = "proto3"; // Specifies the Protocol Buffer language version 
+
+option java_package = "Support.GRPC"; // Defines the Java package name for generated code
+package Grpc; // Defines the package name for the service
+
+// File processing service definition
+service FileService {
+    // Upload a file
+    rpc UploadFile (UploadFileRequest) returns (UploadFileResponse); // RPC for uploading a file
+    // Download a file
+    rpc DownloadFile (DownloadFileRequest) returns (DownloadFileResponse); // RPC for downloading a file [cite: 2]
+    // Get file metadata
+    rpc GetFileMetadata (GetFileMetadataRequest) returns (GetFileMetadataResponse); // RPC for getting file metadata [cite: 3]
+    // Delete a file
+    rpc DeleteFile (DeleteFileRequest) returns (DeleteFileResponse); // RPC for deleting a file [cite: 4]
+}
+
+// Request message for uploading a file
+message UploadFileRequest {
+    string filename = 1; // Name of the file
+    bytes content = 2; // File content as bytes
+    string metadata = 3; // Optional metadata for the file [cite: 6]
+}
+
+// Response message for file upload
+message UploadFileResponse {
+    string status = 1; // Status of the upload operation (e.g., "success", "error")
+    string message = 2; [cite_start]// A descriptive message about the upload operation 
+    string file_id = 3; // Unique identifier for the uploaded file
+}
+
+// Request message for downloading a file
+message DownloadFileRequest {
+    string file_id = 1; // Unique identifier of the file to download 
+}
+
+// Response message for file download
+message DownloadFileResponse {
+    string filename = 1; // Name of the downloaded file
+    bytes content = 2; // File content as bytes
+    string metadata = 3; // Metadata associated with the file 
+}
+
+// Request message for getting file metadata
+message GetFileMetadataRequest {
+    string file_id = 1; // Unique identifier of the file to get metadata for 
+}
+
+// Response message for file metadata
+message GetFileMetadataResponse {
+    string filename = 1; // Name of the file
+    string metadata = 2; // Metadata of the file
+    int64 size = 3; // Size of the file in bytes 
+    string created_at = 4; // Creation timestamp of the file in ISO 8601 format
+}
+
+// Request message for deleting a file
+message DeleteFileRequest {
+    string file_id = 1; // Unique identifier of the file to delete 
+}
+
+// Response message for file deletion
+message DeleteFileResponse {
+    string status = 1; // Status of the deletion operation (e.g., "success", "error")
+    string message = 2; // A descriptive message about the deletion operation
+}
