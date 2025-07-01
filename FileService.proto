@@ -8,24 +8,24 @@ service FileService {
     // Upload a file
     rpc UploadFile (UploadFileRequest) returns (UploadFileResponse); // RPC for uploading a file
     // Download a file
-    rpc DownloadFile (DownloadFileRequest) returns (DownloadFileResponse); // RPC for downloading a file [cite: 2]
+    rpc DownloadFile (DownloadFileRequest) returns (DownloadFileResponse); // RPC for downloading a file 
     // Get file metadata
-    rpc GetFileMetadata (GetFileMetadataRequest) returns (GetFileMetadataResponse); // RPC for getting file metadata [cite: 3]
+    rpc GetFileMetadata (GetFileMetadataRequest) returns (GetFileMetadataResponse); // RPC for getting file metadata 
     // Delete a file
-    rpc DeleteFile (DeleteFileRequest) returns (DeleteFileResponse); // RPC for deleting a file [cite: 4]
+    rpc DeleteFile (DeleteFileRequest) returns (DeleteFileResponse); // RPC for deleting a file 
 }
 
 // Request message for uploading a file
 message UploadFileRequest {
     string filename = 1; // Name of the file
     bytes content = 2; // File content as bytes
-    string metadata = 3; // Optional metadata for the file [cite: 6]
+    string metadata = 3; // Optional metadata for the file 
 }
 
 // Response message for file upload
 message UploadFileResponse {
     string status = 1; // Status of the upload operation (e.g., "success", "error")
-    string message = 2; [cite_start]// A descriptive message about the upload operation 
+    string message = 2; // A descriptive message about the upload operation 
     string file_id = 3; // Unique identifier for the uploaded file
 }
 
